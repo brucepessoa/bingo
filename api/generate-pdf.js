@@ -1,7 +1,9 @@
+// Importa o módulo 'playwright-core' e, para o Vercel, o @sparticuz/chromium
 import { chromium } from 'playwright-core';
+import chromium_serverless from '@sparticuz/chromium';
 
-// Define a porta do navegador headless
-const CHROME_EXECUTABLE_PATH = process.env.CHROME_EXECUTABLE_PATH || chromium.executablePath;
+// Define o caminho para o executável do navegador, usando a versão para Vercel
+const CHROME_EXECUTABLE_PATH = process.env.CHROME_EXECUTABLE_PATH || chromium_serverless.executablePath;
 
 // Função para gerar os números da cartela
 function generateBingoCardNumbers() {
