@@ -1,5 +1,4 @@
 import { chromium } from 'playwright-core';
-import chromium from '@sparticuz/chromium';
 
 // Define a porta do navegador headless
 const CHROME_EXECUTABLE_PATH = process.env.CHROME_EXECUTABLE_PATH || chromium.executablePath;
