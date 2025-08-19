@@ -1,36 +1,10 @@
-// Importa o módulo 'playwright-core' e, para o Vercel, o @sparticuz/chromium
-import { chromium } from 'playwright-core';
-import chromium_serverless from '@sparticuz/chromium';
+// Importa o módulo 'playwright-core' e o renomeia para evitar conflito
+import { chromium as playwrightChromium } from 'playwright-core';
+// Importa o módulo específico do Vercel
+import vercelChromium from '@sparticuz/chromium';
 
-// Define o caminho para o executável do navegador, usando a versão para Vercel
-const CHROME_EXECUTABLE_PATH = process.env.CHROME_EXECUTABLE_PATH || chromium_serverless.executablePath;
-
-// Função para gerar os números da cartela
-function generateBingoCardNumbers() {
-    const numbers = { B: [], I: [], N: [], G: [], O: [] };
-    // Lógica para gerar os números
-    while (numbers.B.length < 5) {
-        const num = Math.floor(Math.random() * 15) + 1;
-        if (!numbers.B.includes(num)) numbers.B.push(num);
-    }
-    while (numbers.I.length < 5) {
-        const num = Math.floor(Math.random() * 15) + 16;
-        if (!numbers.I.includes(num)) numbers.I.push(num);
-    }
-    while (numbers.N.length < 4) {
-        const num = Math.floor(Math.random() * 15) + 31;
-        if (!numbers.N.includes(num)) numbers.N.push(num);
-    }
-    while (numbers.G.length < 5) {
-        const num = Math.floor(Math.random() * 15) + 46;
-        if (!numbers.G.includes(num)) numbers.G.push(num);
-    }
-    while (numbers.O.length < 5) {
-        const num = Math.floor(Math.random() * 15) + 61;
-        if (!numbers.O.includes(num)) numbers.O.push(num);
-    }
-    return numbers;
-}
+// Define a porta do navegador headless usando o módulo do Vercel
+const CHROME_EXECUTABLE_PATH = process.env.CHROME_EXECUTABLE_PATH || vercelChromium.executablePath;
 
 // A função que será executada pelo Vercel
 export default async (req, res) => {
@@ -64,6 +38,32 @@ export default async (req, res) => {
         for (let i = 0; i < numPages; i++) {
             let cardsHtml = '';
             for (let j = 0; j < numCards; j++) {
+                // Função de geração de números de bingo
+                const generateBingoCardNumbers = () => {
+                    const numbers = { B: [], I: [], N: [], G: [], O: [] };
+                    while (numbers.B.length < 5) {
+                        const num = Math.floor(Math.random() * 15) + 1;
+                        if (!numbers.B.includes(num)) numbers.B.push(num);
+                    }
+                    while (numbers.I.length < 5) {
+                        const num = Math.floor(Math.random() * 15) + 16;
+                        if (!numbers.I.includes(num)) numbers.I.push(num);
+                    }
+                    while (numbers.N.length < 4) {
+                        const num = Math.floor(Math.random() * 15) + 31;
+                        if (!numbers.N.includes(num)) numbers.N.push(num);
+                    }
+                    while (numbers.G.length < 5) {
+                        const num = Math.floor(Math.random() * 15) + 46;
+                        if (!numbers.G.includes(num)) numbers.G.push(num);
+                    }
+                    while (numbers.O.length < 5) {
+                        const num = Math.floor(Math.random() * 15) + 61;
+                        if (!numbers.O.includes(num)) numbers.O.push(num);
+                    }
+                    return numbers;
+                };
+
                 const masterNumbers = generateBingoCardNumbers();
                 const prizeLabel = `${j + 1}º Prêmio: ${prizes[j]}`;
                 cardsHtml += `
@@ -233,9 +233,9 @@ export default async (req, res) => {
         `;
 
         // Usa o navegador headless para gerar o PDF
-        const browser = await chromium.launch({
-            args: [...chromium.args, '--font-render-hinting=none'],
-            executablePath: await chromium.executablePath(),
+        const browser = await playwrightChromium.launch({
+            args: [...vercelChromium.args, '--font-render-hinting=none'],
+            executablePath: await vercelChromium.executablePath,
             headless: true,
         });
 
