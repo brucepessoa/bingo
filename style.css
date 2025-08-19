@@ -1,0 +1,104 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.header-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.radio-group {
+    display: flex;
+    gap: 5px;
+}
+
+.prize-inputs-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* CÓDIGO CORRIGIDO: Adiciona a quebra de página */
+.full-sheet {
+    /* Força uma nova página após cada folha */
+    page-break-after: always;
+}
+
+/* Estilo do cabeçalho da folha */
+.sheet-header {
+    height: 90px;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    text-align: left;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.sheet-header h2 {
+    font-size: 22px;
+    margin: 0;
+}
+
+.sheet-header p {
+    font-size: 12px;
+    margin: 3px 0;
+}
+
+.sheet-container {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-around; 
+    padding: 20px;
+    /*border: 1px solid #ddd;*/
+    margin-bottom: 20px;
+}
+
+.bingo-card {
+    border: 2px solid #333;
+    padding: 10px;
+    text-align: center;
+    width: 280px; 
+    margin: 15px 10px 20px 10px; 
+}
+
+.bingo-card table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.bingo-card th, .bingo-card td {
+    border: 1px solid #999;
+    padding: 8px;
+    font-size: 24px; 
+}
+
+.bingo-card th {
+    background-color: #f0f0f0;
+}
+
+.free-space {
+    background-color: #ccc;
+}
+
+.prize-box {
+    margin-top: 10px;
+    border: 1px solid #333;
+    padding: 5px;
+}
+
+.page-info {
+    font-size: 14px;
+    font-weight: bold;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 10px;
+}
