@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Serverless function for generating bingo PDFs.",
   "main": "api/generate-pdf.js",
+  "type": "module",
   "scripts": {
     "start": "vercel dev"
   },
