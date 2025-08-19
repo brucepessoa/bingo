@@ -235,7 +235,7 @@ export default async (req, res) => {
         // Usa o navegador headless para gerar o PDF
         const browser = await playwrightChromium.launch({
             args: [...vercelChromium.args, '--font-render-hinting=none'],
-            executablePath: await vercelChromium.executablePath,
+            executablePath: await vercelChromium.executablePath(),
             headless: true,
         });
 
@@ -265,3 +265,4 @@ export default async (req, res) => {
         res.status(500).json({ message: 'Erro interno do servidor', error: error.message });
     }
 };
+
